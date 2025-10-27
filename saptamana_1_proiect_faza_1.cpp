@@ -50,7 +50,7 @@ public:
     }
 };
 
-// Initializare atribute statice pentru Polita
+
 int Polita::numarTotalPolite = 0;
 float Polita::comisionAgent = 15.0f;
 
@@ -109,6 +109,58 @@ public:
 int Asigurat::numarTotalAsigurati = 0;
 float Asigurat::discountFidelitate = 10.0f;
 
+class AnimalDeCompanie {
+public:
+
+    char* nume;
+    char* rasa;
+    int varsta;
+    float greutate;
+    bool areAfectiuniPreexistente;
+    
+
+    static int numarAnimaleAsigurate;
+    static float tarifVeterinarMediu;
+
+    const int idAnimal;
+    const char* specie;
+
+    AnimalDeCompanie() : idAnimal(++numarAnimaleAsigurate), specie("Necunoscuta") {
+        nume = new char[30];
+        strcpy(nume, "Necunoscut");
+        rasa = new char[30];
+        strcpy(rasa, "Mestecata");
+        varsta = 0;
+        greutate = 0.0f;
+        areAfectiuniPreexistente = false;
+    }
+    
+
+    
+
+    static float estimeazaCostAnualVeterinar(int numarAnimale) {
+        return numarAnimale * tarifVeterinarMediu;
+    }
+    
+
+    void afisare() {
+        cout << "\nANIMAL DE COMPANIE" << endl;
+        cout << "ID Animal: " << idAnimal << endl;
+        cout << "Nume: " << nume << endl;
+        cout << "Specie: " << specie << endl;
+        cout << "Rasa: " << rasa << endl;
+        cout << "Varsta: " << varsta << " ani" << endl;
+        cout << "Greutate: " << greutate << " kg" << endl;
+        cout << "Are afectiuni preexistente: " << (areAfectiuniPreexistente ? "Da" : "Nu") << endl;
+        cout << "Total animale asigurate: " << numarAnimaleAsigurate << endl;
+        cout << "Tarif veterinar mediu: " << tarifVeterinarMediu << " RON" << endl;
+    }
+};
+
+
+int AnimalDeCompanie::numarAnimaleAsigurate = 0;
+float AnimalDeCompanie::tarifVeterinarMediu = 500.0f;
+
 
 int main() {
 
@@ -126,6 +178,13 @@ int main() {
     
     Asigurat asig1;
     asig1.afisare();
+    
+    
+
+    cout << "\n\nTESTARE CLASA ANIMAL DECOMPANIE\n";
+    
+    AnimalDeCompanie animal1;
+    animal1.afisare();
     
     return 0;
 }
