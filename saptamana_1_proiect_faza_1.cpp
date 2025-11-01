@@ -6,7 +6,7 @@ using namespace std;
 
 
 class Polita {
-public:
+private:
     // Atribute normale
     char* numarPolita;
     int durAcoperire;
@@ -21,6 +21,7 @@ public:
     const int idPolita;
     const char* tipAcoperire;
     
+public:
     // Constructor 1 - fara parametri
     Polita() : idPolita(++numarTotalPolite), tipAcoperire("Standard") {
         numarPolita = new char[20];
@@ -43,6 +44,29 @@ public:
     ~Polita() {
         delete[] numarPolita;
     }
+    
+    // Getteri
+    const char* getNumarPolita() const { return numarPolita; }
+    int getDurAcoperire() const { return durAcoperire; }
+    float getPrimaAsigurare() const { return primaAsigurare; }
+    bool getEsteActiva() const { return esteActiva; }
+    int getIdPolita() const { return idPolita; }
+    const char* getTipAcoperire() const { return tipAcoperire; }
+    
+    // Setteri
+    void setNumarPolita(const char* numar) {
+        delete[] numarPolita;
+        numarPolita = new char[strlen(numar) + 1];
+        strcpy(numarPolita, numar);
+    }
+    void setDurAcoperire(int durata) { durAcoperire = durata; }
+    void setPrimaAsigurare(float prima) { primaAsigurare = prima; }
+    void setEsteActiva(bool activa) { esteActiva = activa; }
+    
+    // Functii statice pentru atribute statice
+    static int getNumarTotalPolite() { return numarTotalPolite; }
+    static float getComisionAgent() { return comisionAgent; }
+    static void setComisionAgent(float comision) { comisionAgent = comision; }
 
     // Functie statica
     static float calculeazaValoareTotalaPolite(int numarPolite, float primaMedie) {
@@ -70,8 +94,7 @@ float Polita::comisionAgent = 15.0f;
 
 
 class Asigurat {
-public:
-
+private:
     char* nume;
     char* cnp;
     int varsta;
@@ -81,11 +104,10 @@ public:
     static int numarTotalAsigurati;
     static float discountFidelitate;
     
-
     const int idAsigurat;
     const char* categorie;
     
-
+public:
     Asigurat() : idAsigurat(++numarTotalAsigurati), categorie("Standard") {
         nume = new char[50];
         strcpy(nume, "Anonim");
@@ -112,6 +134,35 @@ public:
         delete[] nume;
         delete[] cnp;
     }
+    
+    // Getteri
+    const char* getNume() const { return nume; }
+    const char* getCnp() const { return cnp; }
+    int getVarsta() const { return varsta; }
+    float getIstoricClaims() const { return istoricClaims; }
+    bool getAreDiscountFidelitate() const { return areDiscountFidelitate; }
+    int getIdAsigurat() const { return idAsigurat; }
+    const char* getCategorie() const { return categorie; }
+    
+    // Setteri
+    void setNume(const char* numeNou) {
+        delete[] nume;
+        nume = new char[strlen(numeNou) + 1];
+        strcpy(nume, numeNou);
+    }
+    void setCnp(const char* cnpNou) {
+        delete[] cnp;
+        cnp = new char[strlen(cnpNou) + 1];
+        strcpy(cnp, cnpNou);
+    }
+    void setVarsta(int varstaNoua) { varsta = varstaNoua; }
+    void setIstoricClaims(float claims) { istoricClaims = claims; }
+    void setAreDiscountFidelitate(bool discount) { areDiscountFidelitate = discount; }
+    
+    // Functii statice pentru atribute statice
+    static int getNumarTotalAsigurati() { return numarTotalAsigurati; }
+    static float getDiscountFidelitate() { return discountFidelitate; }
+    static void setDiscountFidelitate(float discount) { discountFidelitate = discount; }
 
     static float calculeazaPrimaAjustata(float primaBase, bool areDiscount) {
         if (areDiscount) {
@@ -138,21 +189,20 @@ int Asigurat::numarTotalAsigurati = 0;
 float Asigurat::discountFidelitate = 10.0f;
 
 class AnimalDeCompanie {
-public:
-
+private:
     char* nume;
     char* rasa;
     int varsta;
     float greutate;
     bool areAfectiuniPreexistente;
     
-
     static int numarAnimaleAsigurate;
     static float tarifVeterinarMediu;
 
     const int idAnimal;
     const char* specie;
 
+public:
     AnimalDeCompanie() : idAnimal(++numarAnimaleAsigurate), specie("Necunoscuta") {
         nume = new char[30];
         strcpy(nume, "Necunoscut");
@@ -179,6 +229,35 @@ public:
         delete[] nume;
         delete[] rasa;
     }
+    
+    // Getteri
+    const char* getNume() const { return nume; }
+    const char* getRasa() const { return rasa; }
+    int getVarsta() const { return varsta; }
+    float getGreutate() const { return greutate; }
+    bool getAreAfectiuniPreexistente() const { return areAfectiuniPreexistente; }
+    int getIdAnimal() const { return idAnimal; }
+    const char* getSpecie() const { return specie; }
+    
+    // Setteri
+    void setNume(const char* numeNou) {
+        delete[] nume;
+        nume = new char[strlen(numeNou) + 1];
+        strcpy(nume, numeNou);
+    }
+    void setRasa(const char* rasaNoua) {
+        delete[] rasa;
+        rasa = new char[strlen(rasaNoua) + 1];
+        strcpy(rasa, rasaNoua);
+    }
+    void setVarsta(int varstaNoua) { varsta = varstaNoua; }
+    void setGreutate(float greutateNoua) { greutate = greutateNoua; }
+    void setAreAfectiuniPreexistente(bool afectiuni) { areAfectiuniPreexistente = afectiuni; }
+    
+    // Functii statice pentru atribute statice
+    static int getNumarAnimaleAsigurate() { return numarAnimaleAsigurate; }
+    static float getTarifVeterinarMediu() { return tarifVeterinarMediu; }
+    static void setTarifVeterinarMediu(float tarif) { tarifVeterinarMediu = tarif; }
 
     static float estimeazaCostAnualVeterinar(int numarAnimale) {
         return numarAnimale * tarifVeterinarMediu;
