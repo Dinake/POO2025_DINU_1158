@@ -30,6 +30,15 @@ public:
         esteActiva = false;
     }
     
+    // Constructor de copiere
+    Polita(const Polita& other) : idPolita(other.idPolita), tipAcoperire(other.tipAcoperire) {
+        numarPolita = new char[strlen(other.numarPolita) + 1];
+        strcpy(numarPolita, other.numarPolita);
+        durAcoperire = other.durAcoperire;
+        primaAsigurare = other.primaAsigurare;
+        esteActiva = other.esteActiva;
+    }
+    
     // Destructor
     ~Polita() {
         delete[] numarPolita;
@@ -87,6 +96,17 @@ public:
         areDiscountFidelitate = false;
     }
     
+    // Constructor de copiere
+    Asigurat(const Asigurat& other) : idAsigurat(other.idAsigurat), categorie(other.categorie) {
+        nume = new char[strlen(other.nume) + 1];
+        strcpy(nume, other.nume);
+        cnp = new char[strlen(other.cnp) + 1];
+        strcpy(cnp, other.cnp);
+        varsta = other.varsta;
+        istoricClaims = other.istoricClaims;
+        areDiscountFidelitate = other.areDiscountFidelitate;
+    }
+    
     // Destructor
     ~Asigurat() {
         delete[] nume;
@@ -141,6 +161,17 @@ public:
         varsta = 0;
         greutate = 0.0f;
         areAfectiuniPreexistente = false;
+    }
+    
+    // Constructor de copiere
+    AnimalDeCompanie(const AnimalDeCompanie& other) : idAnimal(other.idAnimal), specie(other.specie) {
+        nume = new char[strlen(other.nume) + 1];
+        strcpy(nume, other.nume);
+        rasa = new char[strlen(other.rasa) + 1];
+        strcpy(rasa, other.rasa);
+        varsta = other.varsta;
+        greutate = other.greutate;
+        areAfectiuniPreexistente = other.areAfectiuniPreexistente;
     }
     
     // Destructor
