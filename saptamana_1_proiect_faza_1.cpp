@@ -30,6 +30,10 @@ public:
         esteActiva = false;
     }
     
+    // Destructor
+    ~Polita() {
+        delete[] numarPolita;
+    }
 
     // Functie statica
     static float calculeazaValoareTotalaPolite(int numarPolite, float primaMedie) {
@@ -83,7 +87,11 @@ public:
         areDiscountFidelitate = false;
     }
     
-
+    // Destructor
+    ~Asigurat() {
+        delete[] nume;
+        delete[] cnp;
+    }
 
     static float calculeazaPrimaAjustata(float primaBase, bool areDiscount) {
         if (areDiscount) {
@@ -135,8 +143,11 @@ public:
         areAfectiuniPreexistente = false;
     }
     
-
-    
+    // Destructor
+    ~AnimalDeCompanie() {
+        delete[] nume;
+        delete[] rasa;
+    }
 
     static float estimeazaCostAnualVeterinar(int numarAnimale) {
         return numarAnimale * tarifVeterinarMediu;
