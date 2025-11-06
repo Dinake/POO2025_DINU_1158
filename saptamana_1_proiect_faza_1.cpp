@@ -276,11 +276,32 @@ public:
         cout << "Total animale asigurate: " << numarAnimaleAsigurate << endl;
         cout << "Tarif veterinar mediu: " << tarifVeterinarMediu << " RON" << endl;
     }
+    
+    // Declarare functie friend
+    friend void afiseazaRaportComplet(AnimalDeCompanie& animal, Polita& polita);
 };
 
 
 int AnimalDeCompanie::numarAnimaleAsigurate = 0;
 float AnimalDeCompanie::tarifVeterinarMediu = 500.0f;
+
+
+float calculeazaPrimaTotalaAsigurare(Polita& polita, Asigurat& asigurat) {
+    float primaBase = polita.getPrimaAsigurare();
+    
+    if (asigurat.getAreDiscountFidelitate()) {
+        float discount = Asigurat::getDiscountFidelitate();
+        float primaFinala = primaBase * (1 - discount / 100);
+        cout << "\n>>> Calcul Prima Totala <<<" << endl;
+        cout << "Asigurat: " << asigurat.getNume() << endl;
+        cout << "Prima de baza: " << primaBase << " RON" << endl;
+        cout << "Discount fidelitate: " << discount << "%" << endl;
+        cout << "Prima finala: " << primaFinala << " RON" << endl;
+        return primaFinala;
+    }
+    
+    return primaBase;
+}
 
 
 int main() {
