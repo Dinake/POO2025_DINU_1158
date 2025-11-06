@@ -328,27 +328,109 @@ void afiseazaRaportComplet(AnimalDeCompanie& animal, Polita& polita) {
 
 int main() {
 
-    cout << "  PROIECT POO - FAZA 1" << endl;
-    cout << "  Domeniu: ASIGURARI ANIMALE COMPANIE" << endl;
 
-
-    cout << "\n\nTESTARE CLASA POLITA\n";
+    cout << "\n\n*** TESTARE CLASA POLITA ***\n";
     
     Polita pol1;
     pol1.afisare();
     
+    cout << "\n-- Testare Setteri Polita --" << endl;
+    pol1.setNumarPolita("POL2025001");
+    pol1.setDurAcoperire(24);
+    pol1.setPrimaAsigurare(180.0f);
+    pol1.setEsteActiva(true);
     
-    cout << "\n\nTESTARE CLASA ASIGURAT \n";
+    cout << "\n-- Testare Getteri Polita --" << endl;
+    cout << "Numar polita: " << pol1.getNumarPolita() << endl;
+    cout << "Durata acoperire: " << pol1.getDurAcoperire() << " luni" << endl;
+    cout << "Prima asigurare: " << pol1.getPrimaAsigurare() << " RON" << endl;
+    cout << "Este activa: " << (pol1.getEsteActiva() ? "Da" : "Nu") << endl;
+    
+    cout << "\n-- Testare Constructor de Copiere Polita --" << endl;
+    Polita pol2 = pol1;
+    pol2.afisare();
+    
+    cout << "\n-- Testare Functii Statice Polita --" << endl;
+    cout << "Numar total polite: " << Polita::getNumarTotalPolite() << endl;
+    cout << "Comision agent: " << Polita::getComisionAgent() << "%" << endl;
+    cout << "Valoare totala pentru 100 polite (180 RON): " 
+         << Polita::calculeazaValoareTotalaPolite(100, 180.0f) << " RON" << endl;
+    
+    
+    // ===== TESTARE CLASA ASIGURAT =====
+    cout << "\n\nTESTARE CLASA ASIGURAT\n";
     
     Asigurat asig1;
     asig1.afisare();
     
+    cout << "\n-- Testare Setteri Asigurat --" << endl;
+    asig1.setNume("Popescu Ion");
+    asig1.setCnp("1850623401234");
+    asig1.setVarsta(40);
+    asig1.setIstoricClaims(500.0f);
+    asig1.setAreDiscountFidelitate(true);
     
-
-    cout << "\n\nTESTARE CLASA ANIMAL DECOMPANIE\n";
+    cout << "\n-- Testare Getteri Asigurat --" << endl;
+    cout << "Nume: " << asig1.getNume() << endl;
+    cout << "CNP: " << asig1.getCnp() << endl;
+    cout << "Varsta: " << asig1.getVarsta() << " ani" << endl;
+    cout << "Istoric claims: " << asig1.getIstoricClaims() << " RON" << endl;
+    cout << "Are discount: " << (asig1.getAreDiscountFidelitate() ? "Da" : "Nu") << endl;
+    
+    cout << "\n-- Testare Constructor de Copiere Asigurat --" << endl;
+    Asigurat asig2 = asig1;
+    asig2.afisare();
+    
+    cout << "\n-- Testare Functii Statice Asigurat --" << endl;
+    cout << "Numar total asigurati: " << Asigurat::getNumarTotalAsigurati() << endl;
+    cout << "Discount fidelitate: " << Asigurat::getDiscountFidelitate() << "%" << endl;
+    cout << "Prima ajustata (200 RON cu discount): " 
+         << Asigurat::calculeazaPrimaAjustata(200.0f, true) << " RON" << endl;
+    
+    
+    // ===== TESTARE CLASA ANIMALDECOMPANIE =====
+    cout << "\n\nTESTARE CLASA ANIMALDECOMPANIE\n";
     
     AnimalDeCompanie animal1;
     animal1.afisare();
+    
+    cout << "\n-- Testare Setteri AnimalDeCompanie --" << endl;
+    animal1.setNume("Max");
+    animal1.setRasa("Golden Retriever");
+    animal1.setVarsta(3);
+    animal1.setGreutate(28.5f);
+    animal1.setAreAfectiuniPreexistente(false);
+    
+    cout << "\n-- Testare Getteri AnimalDeCompanie --" << endl;
+    cout << "Nume: " << animal1.getNume() << endl;
+    cout << "Rasa: " << animal1.getRasa() << endl;
+    cout << "Varsta: " << animal1.getVarsta() << " ani" << endl;
+    cout << "Greutate: " << animal1.getGreutate() << " kg" << endl;
+    cout << "Are afectiuni: " << (animal1.getAreAfectiuniPreexistente() ? "Da" : "Nu") << endl;
+    
+    cout << "\n-- Testare Constructor de Copiere AnimalDeCompanie --" << endl;
+    AnimalDeCompanie animal2 = animal1;
+    animal2.afisare();
+    
+    cout << "\n-- Testare Functii Statice AnimalDeCompanie --" << endl;
+    cout << "Numar animale asigurate: " << AnimalDeCompanie::getNumarAnimaleAsigurate() << endl;
+    cout << "Tarif veterinar mediu: " << AnimalDeCompanie::getTarifVeterinarMediu() << " RON" << endl;
+    cout << "Cost anual pentru 5 animale: " 
+         << AnimalDeCompanie::estimeazaCostAnualVeterinar(5) << " RON" << endl;
+    
+    
+    // ===== TESTARE FUNCTII FRIEND =====
+    cout << "\n\nESTARE FUNCTII FRIEND\n";
+    
+    float primaTotala = calculeazaPrimaTotalaAsigurare(pol1, asig1);
+    cout << "Prima totala returnata: " << primaTotala << " RON" << endl;
+    
+    afiseazaRaportComplet(animal1, pol1);
+    
+    
+    cout << "\n\n========================================" << endl;
+    cout << "  FINALIZARE TESTARE FAZA 2" << endl;
+    cout << "========================================" << endl;
     
     return 0;
 }
