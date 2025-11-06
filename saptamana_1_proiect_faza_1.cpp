@@ -303,6 +303,28 @@ float calculeazaPrimaTotalaAsigurare(Polita& polita, Asigurat& asigurat) {
     return primaBase;
 }
 
+// Functie friend 2: Afiseaza raport complet despre animal si polita
+void afiseazaRaportComplet(AnimalDeCompanie& animal, Polita& polita) {
+    cout << "\n>>> RAPORT COMPLET ASIGURARE <<<" << endl;
+    cout << "====================================" << endl;
+    cout << "ANIMAL ASIGURAT:" << endl;
+    cout << "  Nume: " << animal.getNume() << endl;
+    cout << "  Specie: " << animal.getSpecie() << endl;
+    cout << "  Rasa: " << animal.getRasa() << endl;
+    cout << "  Varsta: " << animal.getVarsta() << " ani" << endl;
+    cout << "  Greutate: " << animal.getGreutate() << " kg" << endl;
+    cout << "  Are afectiuni: " << (animal.getAreAfectiuniPreexistente() ? "Da" : "Nu") << endl;
+    cout << "\nPOLITA ASOCIATA:" << endl;
+    cout << "  Numar polita: " << polita.getNumarPolita() << endl;
+    cout << "  Prima lunara: " << polita.getPrimaAsigurare() << " RON" << endl;
+    cout << "  Durata: " << polita.getDurAcoperire() << " luni" << endl;
+    cout << "  Status: " << (polita.getEsteActiva() ? "Activa" : "Inactiva") << endl;
+    
+    float costTotal = polita.getPrimaAsigurare() * polita.getDurAcoperire();
+    cout << "\nCOST TOTAL ASIGURARE: " << costTotal << " RON" << endl;
+    cout << "====================================" << endl;
+}
+
 
 int main() {
 
