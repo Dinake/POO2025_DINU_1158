@@ -45,6 +45,20 @@ public:
         delete[] numarPolita;
     }
     
+    // Operator de atribuire
+    Polita& operator=(const Polita& other) {
+        if (this != &other) {
+            delete[] numarPolita;
+            
+            numarPolita = new char[strlen(other.numarPolita) + 1];
+            strcpy(numarPolita, other.numarPolita);
+            durAcoperire = other.durAcoperire;
+            primaAsigurare = other.primaAsigurare;
+            esteActiva = other.esteActiva;
+        }
+        return *this;
+    }
+    
     // Getteri
     const char* getNumarPolita() const { return numarPolita; }
     int getDurAcoperire() const { return durAcoperire; }
@@ -90,7 +104,6 @@ public:
 
 int Polita::numarTotalPolite = 0;
 float Polita::comisionAgent = 15.0f;
-
 
 
 class Asigurat {
@@ -356,8 +369,7 @@ int main() {
     cout << "Valoare totala pentru 100 polite (180 RON): " 
          << Polita::calculeazaValoareTotalaPolite(100, 180.0f) << " RON" << endl;
     
-    
-    // ===== TESTARE CLASA ASIGURAT =====
+
     cout << "\n\nTESTARE CLASA ASIGURAT\n";
     
     Asigurat asig1;
@@ -388,7 +400,7 @@ int main() {
          << Asigurat::calculeazaPrimaAjustata(200.0f, true) << " RON" << endl;
     
     
-    // ===== TESTARE CLASA ANIMALDECOMPANIE =====
+
     cout << "\n\nTESTARE CLASA ANIMALDECOMPANIE\n";
     
     AnimalDeCompanie animal1;
@@ -418,8 +430,8 @@ int main() {
     cout << "Cost anual pentru 5 animale: " 
          << AnimalDeCompanie::estimeazaCostAnualVeterinar(5) << " RON" << endl;
     
-    
-    // ===== TESTARE FUNCTII FRIEND =====
+
+
     cout << "\n\nESTARE FUNCTII FRIEND\n";
     
     float primaTotala = calculeazaPrimaTotalaAsigurare(pol1, asig1);
@@ -428,9 +440,6 @@ int main() {
     afiseazaRaportComplet(animal1, pol1);
     
     
-    cout << "\n\n========================================" << endl;
-    cout << "  FINALIZARE TESTARE FAZA 2" << endl;
-    cout << "========================================" << endl;
     
     return 0;
 }
