@@ -59,6 +59,13 @@ public:
         return *this;
     }
     
+    // Operator+ - aduna durata acoperire
+    Polita operator+(int luniAdaugate) const {
+        Polita temp = *this;
+        temp.durAcoperire += luniAdaugate;
+        return temp;
+    }
+    
     // Getteri
     const char* getNumarPolita() const { return numarPolita; }
     int getDurAcoperire() const { return durAcoperire; }
@@ -400,7 +407,6 @@ int main() {
          << Asigurat::calculeazaPrimaAjustata(200.0f, true) << " RON" << endl;
     
     
-
     cout << "\n\nTESTARE CLASA ANIMALDECOMPANIE\n";
     
     AnimalDeCompanie animal1;
