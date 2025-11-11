@@ -66,6 +66,14 @@ public:
         return temp;
     }
     
+    // Operator<< - afisare
+    friend ostream& operator<<(ostream& os, const Polita& p) {
+        os << "Polita [" << p.numarPolita << "] - Prima: " << p.primaAsigurare 
+           << " RON, Durata: " << p.durAcoperire << " luni, Activa: " 
+           << (p.esteActiva ? "Da" : "Nu");
+        return os;
+    }
+    
     // Getteri
     const char* getNumarPolita() const { return numarPolita; }
     int getDurAcoperire() const { return durAcoperire; }
