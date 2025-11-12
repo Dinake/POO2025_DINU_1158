@@ -74,6 +74,12 @@ public:
         return os;
     }
     
+    // Operator++ (preincrementare) - incrementeaza durata acoperire
+    Polita& operator++() {
+        durAcoperire++;
+        return *this;
+    }
+    
     // Getteri
     const char* getNumarPolita() const { return numarPolita; }
     int getDurAcoperire() const { return durAcoperire; }
