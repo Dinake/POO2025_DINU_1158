@@ -169,6 +169,23 @@ public:
         delete[] cnp;
     }
     
+    // Operator de atribuire
+    Asigurat& operator=(const Asigurat& other) {
+        if (this != &other) {
+            delete[] nume;
+            delete[] cnp;
+            
+            nume = new char[strlen(other.nume) + 1];
+            strcpy(nume, other.nume);
+            cnp = new char[strlen(other.cnp) + 1];
+            strcpy(cnp, other.cnp);
+            varsta = other.varsta;
+            istoricClaims = other.istoricClaims;
+            areDiscountFidelitate = other.areDiscountFidelitate;
+        }
+        return *this;
+    }
+    
     // Getteri
     const char* getNume() const { return nume; }
     const char* getCnp() const { return cnp; }
