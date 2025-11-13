@@ -186,6 +186,11 @@ public:
         return *this;
     }
     
+    // Operator== - compara dupa CNP
+    bool operator==(const Asigurat& other) const {
+        return strcmp(cnp, other.cnp) == 0;
+    }
+    
     // Getteri
     const char* getNume() const { return nume; }
     const char* getCnp() const { return cnp; }
