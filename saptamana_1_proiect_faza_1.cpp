@@ -191,6 +191,14 @@ public:
         return strcmp(cnp, other.cnp) == 0;
     }
     
+    // Operator[] - acces la caracterul din nume
+    char operator[](int index) const {
+        if (index >= 0 && index < (int)strlen(nume)) {
+            return nume[index];
+        }
+        return '\0';
+    }
+    
     // Getteri
     const char* getNume() const { return nume; }
     const char* getCnp() const { return cnp; }
