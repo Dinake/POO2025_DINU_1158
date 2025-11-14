@@ -199,6 +199,11 @@ public:
         return '\0';
     }
     
+    // Operator! - verifica daca NU are discount fidelitate
+    bool operator!() const {
+        return !areDiscountFidelitate;
+    }
+    
     // Getteri
     const char* getNume() const { return nume; }
     const char* getCnp() const { return cnp; }
