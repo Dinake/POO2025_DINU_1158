@@ -299,6 +299,39 @@ public:
         delete[] rasa;
     }
     
+    // Operator de atribuire
+    AnimalDeCompanie& operator=(const AnimalDeCompanie& other) {
+        if (this != &other) {
+            delete[] nume;
+            delete[] rasa;
+            
+            nume = new char[strlen(other.nume) + 1];
+            strcpy(nume, other.nume);
+            rasa = new char[strlen(other.rasa) + 1];
+            strcpy(rasa, other.rasa);
+            varsta = other.varsta;
+            greutate = other.greutate;
+            areAfectiuniPreexistente = other.areAfectiuniPreexistente;
+        }
+        return *this;
+    }
+    
+    // Operator> - compara dupa greutate
+    bool operator>(const AnimalDeCompanie& other) const {
+        return greutate > other.greutate;
+    }
+    
+    // Operator++ incrementeaza varsta
+    AnimalDeCompanie& operator++() {
+        varsta++;
+        return *this;
+    }
+    
+    // Operator cast la float - returneaza greutatea
+    operator float() const {
+        return greutate;
+    }
+    
     // Getteri
     const char* getNume() const { return nume; }
     const char* getRasa() const { return rasa; }
@@ -487,7 +520,7 @@ int main() {
     
 
 
-    cout << "\n\nESTARE FUNCTII FRIEND\n";
+   
     
     float primaTotala = calculeazaPrimaTotalaAsigurare(pol1, asig1);
     cout << "Prima totala returnata: " << primaTotala << " RON" << endl;
@@ -495,6 +528,106 @@ int main() {
     afiseazaRaportComplet(animal1, pol1);
     
     
+
+    
+    // Testare operatori Polita
+    cout << "\n--- OPERATORI POLITA ---" << endl;
+    
+    Polita pol3;
+    pol3.setNumarPolita("POL2025003");
+    pol3.setDurAcoperire(12);
+    pol3.setPrimaAsigurare(150.0f);
+    pol3.setEsteActiva(true);
+    
+    cout << "\n1. Operator= (atribuire):" << endl;
+    Polita pol4;
+    pol4 = pol3;
+    cout << "pol4 dupa atribuire: " << pol4 << endl;
+    
+    cout << "\n2. Operator+ (adunare durata):" << endl;
+    Polita pol5 = pol3 + 6;
+    cout << "pol3 original: " << pol3 << endl;
+    cout << "pol5 (pol3 + 6 luni): " << pol5 << endl;
+    
+    cout << "\n3. Operator<< (afisare):" << endl;
+    cout << "Afisare pol3: " << pol3 << endl;
+    
+    cout << "\n4. Operator++ (incrementare durata):" << endl;
+    cout << "pol3 inainte: durata = " << pol3.getDurAcoperire() << " luni" << endl;
+    ++pol3;
+    cout << "pol3 dupa ++pol3: durata = " << pol3.getDurAcoperire() << " luni" << endl;
+    
+    
+    // Testare operatori Asigurat
+    cout << "\n\n--- OPERATORI ASIGURAT ---" << endl;
+    
+    Asigurat asig3;
+    asig3.setNume("Ionescu Maria");
+    asig3.setCnp("2900215401234");
+    asig3.setVarsta(35);
+    asig3.setIstoricClaims(300.0f);
+    asig3.setAreDiscountFidelitate(true);
+    
+    cout << "\n5. Operator= (atribuire):" << endl;
+    Asigurat asig4;
+    asig4 = asig3;
+    cout << "asig4.getNume() dupa atribuire: " << asig4.getNume() << endl;
+    cout << "asig4.getCnp(): " << asig4.getCnp() << endl;
+    
+    cout << "\n6. Operator== (comparare CNP):" << endl;
+    Asigurat asig5;
+    asig5.setCnp("2900215401234");
+    cout << "asig3 CNP: " << asig3.getCnp() << endl;
+    cout << "asig5 CNP: " << asig5.getCnp() << endl;
+    cout << "asig3 == asig5? " << (asig3 == asig5 ? "DA" : "NU") << endl;
+    cout << "asig3 == asig1? " << (asig3 == asig1 ? "DA" : "NU") << endl;
+    
+    cout << "\n7. Operator[] (acces caracter nume):" << endl;
+    cout << "asig3.getNume(): " << asig3.getNume() << endl;
+    cout << "Primul caracter (index 0): " << asig3[0] << endl;
+    cout << "Al 5-lea caracter (index 4): " << asig3[4] << endl;
+    
+    cout << "\n8. Operator! (verifica lipsa discount):" << endl;
+    cout << "asig3 are discount? " << (asig3.getAreDiscountFidelitate() ? "DA" : "NU") << endl;
+    cout << "!asig3 (nu are discount)? " << (!asig3 ? "DA" : "NU") << endl;
+    cout << "asig1 are discount? " << (asig1.getAreDiscountFidelitate() ? "DA" : "NU") << endl;
+    cout << "!asig1 (nu are discount)? " << (!asig1 ? "DA" : "NU") << endl;
+    
+    
+    // Testare operatori AnimalDeCompanie
+    cout << "\n\n--- OPERATORI ANIMALDECOMPANIE ---" << endl;
+    
+    AnimalDeCompanie animal3;
+    animal3.setNume("Rex");
+    animal3.setRasa("Ciobanesc German");
+    animal3.setVarsta(5);
+    animal3.setGreutate(35.0f);
+    animal3.setAreAfectiuniPreexistente(false);
+    
+    cout << "\n9. Operator= (atribuire):" << endl;
+    AnimalDeCompanie animal4;
+    animal4 = animal3;
+    cout << "animal4.getNume() dupa atribuire: " << animal4.getNume() << endl;
+    cout << "animal4.getRasa(): " << animal4.getRasa() << endl;
+    cout << "animal4.getGreutate(): " << animal4.getGreutate() << " kg" << endl;
+    
+    cout << "\n10. Operator> (comparare greutate):" << endl;
+    cout << "animal3 greutate: " << animal3.getGreutate() << " kg" << endl;
+    cout << "animal1 greutate: " << animal1.getGreutate() << " kg" << endl;
+    cout << "animal3 > animal1? " << (animal3 > animal1 ? "DA" : "NU") << endl;
+    cout << "animal1 > animal3? " << (animal1 > animal3 ? "DA" : "NU") << endl;
+    
+    cout << "\n11. Operator++ (incrementare varsta):" << endl;
+    cout << "animal3 varsta inainte: " << animal3.getVarsta() << " ani" << endl;
+    ++animal3;
+    cout << "animal3 varsta dupa ++animal3: " << animal3.getVarsta() << " ani" << endl;
+    
+    cout << "\n12. Operator cast la float (returneaza greutate):" << endl;
+    float greutateAnimal = animal3;
+    cout << "Greutate obtinuta prin cast: " << greutateAnimal << " kg" << endl;
+    cout << "Folosire directa in expresie: " << (float)animal1 + 5.0f << " kg" << endl;
+    
+
     
     return 0;
 }
