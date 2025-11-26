@@ -80,6 +80,22 @@ public:
         return *this;
     }
     
+    friend istream& operator>>(istream& is, Polita& p) {
+        char buffer[100];
+        cout << "Numar polita: ";
+        is >> buffer;
+        delete[] p.numarPolita;
+        p.numarPolita = new char[strlen(buffer) + 1];
+        strcpy(p.numarPolita, buffer);
+        cout << "Durata acoperire (luni): ";
+        is >> p.durAcoperire;
+        cout << "Prima asigurare (RON): ";
+        is >> p.primaAsigurare;
+        cout << "Este activa (1/0): ";
+        is >> p.esteActiva;
+        return is;
+    }
+    
     // Getteri
     const char* getNumarPolita() const { return numarPolita; }
     int getDurAcoperire() const { return durAcoperire; }
@@ -627,6 +643,24 @@ int main() {
     cout << "Greutate obtinuta prin cast: " << greutateAnimal << " kg" << endl;
     cout << "Folosire directa in expresie: " << (float)animal1 + 5.0f << " kg" << endl;
     
+    
+    cout << "\n\n=== FAZA 4: VECTOR POLITE ===" << endl;
+    int nrPolite;
+    cout << "Cate polite doriti sa introduceti? ";
+    cin >> nrPolite;
+    
+    Polita* vectorPolite = new Polita[nrPolite];
+    for (int i = 0; i < nrPolite; i++) {
+        cout << "\n--- Polita " << i + 1 << " ---" << endl;
+        cin >> vectorPolite[i];
+    }
+    
+    cout << "\n--- Afisare vector polite ---" << endl;
+    for (int i = 0; i < nrPolite; i++) {
+        cout << "Polita " << i + 1 << ": " << vectorPolite[i] << endl;
+    }
+    
+    delete[] vectorPolite;
 
     
     return 0;
