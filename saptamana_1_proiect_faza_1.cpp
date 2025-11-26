@@ -220,6 +220,33 @@ public:
         return !areDiscountFidelitate;
     }
     
+    friend ostream& operator<<(ostream& os, const Asigurat& a) {
+        os << "Asigurat [" << a.nume << "] - CNP: " << a.cnp 
+           << ", Varsta: " << a.varsta << " ani, Claims: " << a.istoricClaims << " RON";
+        return os;
+    }
+    
+    friend istream& operator>>(istream& is, Asigurat& a) {
+        char buffer[100];
+        cout << "Nume asigurat: ";
+        is >> buffer;
+        delete[] a.nume;
+        a.nume = new char[strlen(buffer) + 1];
+        strcpy(a.nume, buffer);
+        cout << "CNP: ";
+        is >> buffer;
+        delete[] a.cnp;
+        a.cnp = new char[strlen(buffer) + 1];
+        strcpy(a.cnp, buffer);
+        cout << "Varsta: ";
+        is >> a.varsta;
+        cout << "Istoric claims (RON): ";
+        is >> a.istoricClaims;
+        cout << "Are discount fidelitate (1/0): ";
+        is >> a.areDiscountFidelitate;
+        return is;
+    }
+    
     // Getteri
     const char* getNume() const { return nume; }
     const char* getCnp() const { return cnp; }
@@ -661,6 +688,25 @@ int main() {
     }
     
     delete[] vectorPolite;
+    
+    
+    cout << "\n\n=== FAZA 4: VECTOR ASIGURATI ===" << endl;
+    int nrAsigurati;
+    cout << "Cati asigurati doriti sa introduceti? ";
+    cin >> nrAsigurati;
+    
+    Asigurat* vectorAsigurati = new Asigurat[nrAsigurati];
+    for (int i = 0; i < nrAsigurati; i++) {
+        cout << "\n--- Asigurat " << i + 1 << " ---" << endl;
+        cin >> vectorAsigurati[i];
+    }
+    
+    cout << "\n--- Afisare vector asigurati ---" << endl;
+    for (int i = 0; i < nrAsigurati; i++) {
+        cout << "Asigurat " << i + 1 << ": " << vectorAsigurati[i] << endl;
+    }
+    
+    delete[] vectorAsigurati;
 
     
     return 0;
