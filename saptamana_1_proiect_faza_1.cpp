@@ -375,6 +375,33 @@ public:
         return greutate;
     }
     
+    friend ostream& operator<<(ostream& os, const AnimalDeCompanie& a) {
+        os << "Animal [" << a.nume << "] - Rasa: " << a.rasa 
+           << ", Varsta: " << a.varsta << " ani, Greutate: " << a.greutate << " kg";
+        return os;
+    }
+    
+    friend istream& operator>>(istream& is, AnimalDeCompanie& a) {
+        char buffer[100];
+        cout << "Nume animal: ";
+        is >> buffer;
+        delete[] a.nume;
+        a.nume = new char[strlen(buffer) + 1];
+        strcpy(a.nume, buffer);
+        cout << "Rasa: ";
+        is >> buffer;
+        delete[] a.rasa;
+        a.rasa = new char[strlen(buffer) + 1];
+        strcpy(a.rasa, buffer);
+        cout << "Varsta: ";
+        is >> a.varsta;
+        cout << "Greutate (kg): ";
+        is >> a.greutate;
+        cout << "Are afectiuni preexistente (1/0): ";
+        is >> a.areAfectiuniPreexistente;
+        return is;
+    }
+    
     // Getteri
     const char* getNume() const { return nume; }
     const char* getRasa() const { return rasa; }
@@ -707,6 +734,25 @@ int main() {
     }
     
     delete[] vectorAsigurati;
+    
+    
+    cout << "\n\n=== FAZA 4: VECTOR ANIMALE ===" << endl;
+    int nrAnimale;
+    cout << "Cate animale doriti sa introduceti? ";
+    cin >> nrAnimale;
+    
+    AnimalDeCompanie* vectorAnimale = new AnimalDeCompanie[nrAnimale];
+    for (int i = 0; i < nrAnimale; i++) {
+        cout << "\n--- Animal " << i + 1 << " ---" << endl;
+        cin >> vectorAnimale[i];
+    }
+    
+    cout << "\n--- Afisare vector animale ---" << endl;
+    for (int i = 0; i < nrAnimale; i++) {
+        cout << "Animal " << i + 1 << ": " << vectorAnimale[i] << endl;
+    }
+    
+    delete[] vectorAnimale;
 
     
     return 0;
