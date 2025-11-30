@@ -773,6 +773,20 @@ int main() {
             cin >> matricePolite[i][j];
         }
     }
+    
+    cout << "\n--- Afisare matrice polite ---" << endl;
+    for (int i = 0; i < nrLinii; i++) {
+        for (int j = 0; j < nrColoane; j++) {
+            cout << "Polita [" << i << "][" << j << "]: " << matricePolite[i][j] << endl;
+        }
+    }
+    
+    for (int i = 0; i < nrLinii; i++) {
+        delete[] matricePolite[i];
+    }
+    delete[] matricePolite;
+    
+    cout << "\n=== FAZA 4 FINALIZATA ===" << endl;
 
     
     return 0;
