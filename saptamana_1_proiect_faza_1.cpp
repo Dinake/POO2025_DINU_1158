@@ -753,6 +753,26 @@ int main() {
     }
     
     delete[] vectorAnimale;
+    
+    
+    cout << "\n\n=== FAZA 4: MATRICE POLITE ===" << endl;
+    int nrLinii, nrColoane;
+    cout << "Numar linii matrice: ";
+    cin >> nrLinii;
+    cout << "Numar coloane matrice: ";
+    cin >> nrColoane;
+    
+    Polita** matricePolite = new Polita*[nrLinii];
+    for (int i = 0; i < nrLinii; i++) {
+        matricePolite[i] = new Polita[nrColoane];
+    }
+    
+    for (int i = 0; i < nrLinii; i++) {
+        for (int j = 0; j < nrColoane; j++) {
+            cout << "\n--- Polita [" << i << "][" << j << "] ---" << endl;
+            cin >> matricePolite[i][j];
+        }
+    }
 
     
     return 0;
