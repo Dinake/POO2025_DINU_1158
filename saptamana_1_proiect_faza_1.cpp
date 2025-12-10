@@ -458,6 +458,33 @@ int AnimalDeCompanie::numarAnimaleAsigurate = 0;
 float AnimalDeCompanie::tarifVeterinarMediu = 500.0f;
 
 
+class ContractAsigurare {
+private:
+    char* numarContract;
+    Polita polita;
+    Asigurat titular;
+    AnimalDeCompanie* animale;
+    int nrAnimale;
+    float valoareTotala;
+    bool esteValid;
+    
+    static int numarTotalContracte;
+    const int idContract;
+
+public:
+    ContractAsigurare() : idContract(++numarTotalContracte) {
+        numarContract = new char[20];
+        strcpy(numarContract, "CTR000000");
+        animale = nullptr;
+        nrAnimale = 0;
+        valoareTotala = 0.0f;
+        esteValid = false;
+    }
+};
+
+int ContractAsigurare::numarTotalContracte = 0;
+
+
 float calculeazaPrimaTotalaAsigurare(Polita& polita, Asigurat& asigurat) {
     float primaBase = polita.getPrimaAsigurare();
     
