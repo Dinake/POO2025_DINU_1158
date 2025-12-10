@@ -480,6 +480,74 @@ public:
         valoareTotala = 0.0f;
         esteValid = false;
     }
+    
+    ContractAsigurare(const char* numar, Polita p, Asigurat t, AnimalDeCompanie* anim, int nrAnim, float val) 
+        : idContract(++numarTotalContracte), polita(p), titular(t) {
+        numarContract = new char[strlen(numar) + 1];
+        strcpy(numarContract, numar);
+        nrAnimale = nrAnim;
+        valoareTotala = val;
+        esteValid = true;
+        if (nrAnimale > 0 && anim != nullptr) {
+            animale = new AnimalDeCompanie[nrAnimale];
+            for (int i = 0; i < nrAnimale; i++) {
+                animale[i] = anim[i];
+            }
+        } else {
+            animale = nullptr;
+        }
+    }
+    
+    ContractAsigurare(const ContractAsigurare& other) 
+        : idContract(other.idContract), polita(other.polita), titular(other.titular) {
+        numarContract = new char[strlen(other.numarContract) + 1];
+        strcpy(numarContract, other.numarContract);
+        nrAnimale = other.nrAnimale;
+        valoareTotala = other.valoareTotala;
+        esteValid = other.esteValid;
+        if (nrAnimale > 0 && other.animale != nullptr) {
+            animale = new AnimalDeCompanie[nrAnimale];
+            for (int i = 0; i < nrAnimale; i++) {
+                animale[i] = other.animale[i];
+            }
+        } else {
+            animale = nullptr;
+        }
+    }
+    
+    ~ContractAsigurare() {
+        delete[] numarContract;
+        if (animale != nullptr) {
+            delete[] animale;
+        }
+    }
+    
+    ContractAsigurare& operator=(const ContractAsigurare& other) {
+        if (this != &other) {
+            delete[] numarContract;
+            if (animale != nullptr) {
+                delete[] animale;
+            }
+            
+            numarContract = new char[strlen(other.numarContract) + 1];
+            strcpy(numarContract, other.numarContract);
+            polita = other.polita;
+            titular = other.titular;
+            nrAnimale = other.nrAnimale;
+            valoareTotala = other.valoareTotala;
+            esteValid = other.esteValid;
+            
+            if (nrAnimale > 0 && other.animale != nullptr) {
+                animale = new AnimalDeCompanie[nrAnimale];
+                for (int i = 0; i < nrAnimale; i++) {
+                    animale[i] = other.animale[i];
+                }
+            } else {
+                animale = nullptr;
+            }
+        }
+        return *this;
+    }
 };
 
 int ContractAsigurare::numarTotalContracte = 0;
