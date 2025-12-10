@@ -548,6 +548,47 @@ public:
         }
         return *this;
     }
+    
+    const char* getNumarContract() const { return numarContract; }
+    Polita getPolita() const { return polita; }
+    Asigurat getTitular() const { return titular; }
+    int getNrAnimale() const { return nrAnimale; }
+    float getValoareTotala() const { return valoareTotala; }
+    bool getEsteValid() const { return esteValid; }
+    int getIdContract() const { return idContract; }
+    static int getNumarTotalContracte() { return numarTotalContracte; }
+    
+    AnimalDeCompanie getAnimal(int index) const {
+        if (index >= 0 && index < nrAnimale && animale != nullptr) {
+            return animale[index];
+        }
+        return AnimalDeCompanie();
+    }
+    
+    void setNumarContract(const char* numar) {
+        delete[] numarContract;
+        numarContract = new char[strlen(numar) + 1];
+        strcpy(numarContract, numar);
+    }
+    void setPolita(Polita p) { polita = p; }
+    void setTitular(Asigurat t) { titular = t; }
+    void setValoareTotala(float val) { valoareTotala = val; }
+    void setEsteValid(bool valid) { esteValid = valid; }
+    
+    void setAnimale(AnimalDeCompanie* anim, int nr) {
+        if (animale != nullptr) {
+            delete[] animale;
+        }
+        nrAnimale = nr;
+        if (nrAnimale > 0 && anim != nullptr) {
+            animale = new AnimalDeCompanie[nrAnimale];
+            for (int i = 0; i < nrAnimale; i++) {
+                animale[i] = anim[i];
+            }
+        } else {
+            animale = nullptr;
+        }
+    }
 };
 
 int ContractAsigurare::numarTotalContracte = 0;
