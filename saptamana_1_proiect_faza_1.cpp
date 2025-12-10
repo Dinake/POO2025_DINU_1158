@@ -589,6 +589,23 @@ public:
             animale = nullptr;
         }
     }
+    
+    friend ostream& operator<<(ostream& os, const ContractAsigurare& c) {
+        os << "Contract [" << c.numarContract << "] - Titular: " << c.titular.getNume()
+           << ", Animale: " << c.nrAnimale << ", Valoare: " << c.valoareTotala << " RON";
+        return os;
+    }
+    
+    AnimalDeCompanie& operator[](int index) {
+        if (index >= 0 && index < nrAnimale && animale != nullptr) {
+            return animale[index];
+        }
+        return animale[0];
+    }
+    
+    bool operator>(const ContractAsigurare& other) const {
+        return valoareTotala > other.valoareTotala;
+    }
 };
 
 int ContractAsigurare::numarTotalContracte = 0;
@@ -923,6 +940,40 @@ int main() {
     delete[] matricePolite;
     
     cout << "\n=== FAZA 4 FINALIZATA ===" << endl;
+    
+    
+    cout << "\n\n=== FAZA 5: TESTARE CONTRACTASIGURARE ===" << endl;
+    
+    Polita pTest;
+    pTest.setNumarPolita("POL2025TEST");
+    pTest.setPrimaAsigurare(200.0f);
+    pTest.setDurAcoperire(12);
+    
+    Asigurat aTest;
+    aTest.setNume("TestPopescu");
+    aTest.setVarsta(35);
+    
+    AnimalDeCompanie animTest[2];
+    animTest[0].setNume("Rex");
+    animTest[0].setRasa("Labrador");
+    animTest[1].setNume("Miau");
+    animTest[1].setRasa("Persana");
+    
+    ContractAsigurare contract1("CTR2025001", pTest, aTest, animTest, 2, 2400.0f);
+    cout << "\nContract creat: " << contract1 << endl;
+    
+    cout << "\nTestare operator[]: " << endl;
+    cout << "Animal 0: " << contract1[0] << endl;
+    cout << "Animal 1: " << contract1[1] << endl;
+    
+    ContractAsigurare contract2;
+    contract2.setValoareTotala(1500.0f);
+    cout << "\nTestare operator>: " << endl;
+    cout << "Contract1 valoare: " << contract1.getValoareTotala() << " RON" << endl;
+    cout << "Contract2 valoare: " << contract2.getValoareTotala() << " RON" << endl;
+    cout << "Contract1 > Contract2? " << (contract1 > contract2 ? "DA" : "NU") << endl;
+    
+    cout << "\n=== FAZA 5 FINALIZATA ===" << endl;
 
     
     return 0;
